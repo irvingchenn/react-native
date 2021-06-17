@@ -204,8 +204,10 @@ public class PermissionsModule extends NativePermissionsAndroidSpec implements P
   @Override
   public boolean onRequestPermissionsResult(
       int requestCode, String[] permissions, int[] grantResults) {
-    mCallbacks.get(requestCode).invoke(grantResults, getPermissionAwareActivity());
-    mCallbacks.remove(requestCode);
+    if (mCallbacks.get(requestCode) != null) {
+      mCallbacks.get(requestCode).invoke(grantResults, getPermissionAwareActivity());
+      mCallbacks.remove(requestCode);
+    }
     return mCallbacks.size() == 0;
   }
 
