@@ -834,17 +834,17 @@ static NSString *RCTSemanticColorNames()
   if ([json isKindOfClass:[NSArray class]]) {
     NSArray *components = [self NSNumberArray:json];
     CGFloat alpha = components.count > 3 ? [self CGFloat:components[3]] : 1.0;
-    return [UIColor colorWithRed:[self CGFloat:components[0]]
-                           green:[self CGFloat:components[1]]
-                            blue:[self CGFloat:components[2]]
-                           alpha:alpha];
+    return [UIColor colorWithDisplayP3Red:[self CGFloat:components[0]]
+                                    green:[self CGFloat:components[1]]
+                                     blue:[self CGFloat:components[2]]
+                                    alpha:alpha];
   } else if ([json isKindOfClass:[NSNumber class]]) {
     NSUInteger argb = [self NSUInteger:json];
     CGFloat a = ((argb >> 24) & 0xFF) / 255.0;
     CGFloat r = ((argb >> 16) & 0xFF) / 255.0;
     CGFloat g = ((argb >> 8) & 0xFF) / 255.0;
     CGFloat b = (argb & 0xFF) / 255.0;
-    return [UIColor colorWithRed:r green:g blue:b alpha:a];
+    return [UIColor colorWithDisplayP3Red:r green:g blue:b alpha:a];
   } else if ([json isKindOfClass:[NSDictionary class]]) {
     NSDictionary *dictionary = json;
     id value = nil;
